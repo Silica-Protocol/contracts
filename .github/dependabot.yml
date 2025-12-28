@@ -1,0 +1,37 @@
+version: 2
+updates:
+  # Rust dependencies
+  - package-ecosystem: "cargo"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "rust"
+      - "contracts"
+    groups:
+      rust-cryptography:
+        patterns:
+          - "pqcrypto-*"
+          - "ed25519-*"
+          - "sha2"
+          - "sha3"
+          - "blake3"
+      rust-wasm:
+        patterns:
+          - "wasm-*"
+          - "wasmtime*"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-prerelease"]
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "ci"
