@@ -1,0 +1,24 @@
+# Rust/WASM contracts
+/target/
+Cargo.lock
+**/*.rs.bk
+*.pdb
+*.wasm
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+*.log
+/out/

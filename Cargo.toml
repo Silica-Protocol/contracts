@@ -1,0 +1,89 @@
+[workspace]
+resolver = "3"
+members = [
+    "_sdk",
+    "crc20",
+    "timelock",
+    "multisig",
+    "dao-governor",
+    "crc721",
+    # "dex-amm",
+    # "oracle",
+    # "privacy-token",
+    # "cross-shard-bridge",
+    # "staking-pool",
+]
+
+[workspace.package]
+edition = "2024"
+authors = ["Silica Team"]
+license = "MIT"
+repository = "https://github.com/Dedme/chert"
+
+[workspace.dependencies]
+# Contract SDK
+silica-contract-sdk = { path = "_sdk" }
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+postcard = { version = "1.0", features = ["alloc"] }
+
+# Cryptography
+blake3 = { version = "1.5", default-features = false }
+sha2 = "0.10"
+sha3 = "0.10"
+hex = { version = "0.4", default-features = false, features = ["alloc"] }
+
+# Error handling
+anyhow = "1.0"
+
+# Testing
+tokio = { version = "1.40", default-features = false, features = ["macros", "rt"] }
+
+[profile.release]
+opt-level = "z"         # Optimize for size (critical for WASM)
+lto = true              # Link-time optimization
+codegen-units = 1       # Single codegen unit for better optimization
+strip = true            # Strip symbols
+panic = "abort"         # Smaller binary size
+overflow-checks = true  # Keep overflow checks for security
+
+[profile.dev]
+opt-level = 0
+debug = true
+
+[profile.release.package."silica-contract-sdk"]
+opt-level = "z"
+codegen-units = 1
+strip = true
+overflow-checks = true
+
+[profile.release.package."crc20-token"]
+opt-level = "z"
+codegen-units = 1
+strip = true
+overflow-checks = true
+
+[profile.release.package."timelock-contract"]
+opt-level = "z"
+codegen-units = 1
+strip = true
+overflow-checks = true
+
+[profile.release.package."multisig-contract"]
+opt-level = "z"
+codegen-units = 1
+strip = true
+overflow-checks = true
+
+[profile.release.package."dao-governor-contract"]
+opt-level = "z"
+codegen-units = 1
+strip = true
+overflow-checks = true
+
+[profile.release.package."crc721-contract"]
+opt-level = "z"
+codegen-units = 1
+strip = true
+overflow-checks = true
